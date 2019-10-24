@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 数据库连接池 -->
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath*:config/*.properties" />
+
+    <dubbo:protocol name="dubbo" port="20889"></dubbo:protocol>
+	<dubbo:application name="youlexuan-pay-service"/>
+	<dubbo:registry protocol="zookeeper" address="${address}"/>
+    <dubbo:annotation package="com.youlexuan.pay.service.impl" />
+
+	<!--阿里支付的alipayClient的配置-->
+	<bean id="alipayClient" class="com.alipay.api.DefaultAlipayClient">
+		<constructor-arg name="serverUrl" value="${serverUrl}"/>
+		<constructor-arg name="appId" value="${appId}"/>
+		<constructor-arg name="privateKey" value="${privateKey}"/>
+		<constructor-arg name="format" value="${format}"/>
+		<constructor-arg name="charset" value="${charset}"/>
+		<constructor-arg name="alipayPublicKey" value="${alipayPulicKey}"/>
+		<constructor-arg name="signType" value="${signType}"/>
+	</bean>
+
+</beans>

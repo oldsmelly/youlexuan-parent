@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>qrdemmo</title>
+    <script src="dist/umd/qrious.js"></script>
+</head>
+<body>
+<img id="qrious">
+
+<script>
+    var qr = new QRious({
+        element:document.getElementById("qrious"),
+        size:200,
+        level:'H',
+        value:"http://www.baidu.com"
+    })
+</script>
+
+</body>
+</html>
